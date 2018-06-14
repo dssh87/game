@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.UploadMapper">
+
+  <select id="getList" resultType="org.zerock.domain.UploadVO">
+  select *from tbl_upload order by regdate desc limit #{skip},10
+  </select>
+  
+  <insert id="insert">
+  insert into tbl_upload (uuid,fileName) values (#{uuid},#{fileName})
+  </insert>
+  
+  <delete id="delete">
+  delete from tbl_upload where uuid=#{uuid}
+  </delete>
+  
+
+  <select id ="getTotal" resultType="int">
+  select count(*) from tbl_upload;
+  </select>
+
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.MemberMapper">
+	<!-- 게시물 조회할때 댓글의 데이터까지 같이 가져오는 기능으로 이해하기 -->
+	<resultMap type="org.zerock.domain.MemberVO" id="memberMap">
+		<id property="mid" column="mid" />
+		<result property="mpw" column="mpw" />
+		<result property="mname" column="mname" />
+		<collection property="authList" resultMap="authMap"></collection>
+	</resultMap>
+
+	<resultMap type="org.zerock.domain.MemberAuthVO" id="authMap">
+		<result property="mid" column="mid" />
+		<result property="auth" column="auth" />
+	</resultMap>
+
+	<select id="read" resultMap="memberMap">
+
+		select m.mid, mpw, mname, auth
+		from
+		tbl_amember_secu m inner join tbl_amember_auth auth
+		on m.mid = auth.mid
+		where m.mid=#{mid}
+
+	</select>
+
+</mapper>
