@@ -43,11 +43,29 @@
 
 	<!-- Header -->
 	<header id="header">
+	
 		<div class="logo">
-			<a href="/board/list">Hielo <span>by TEMPLATED</span></a>
+			<div class="loginbtn">
+
+<sec:authorize access="isAnonymous()">
+	<form action="/login" method="post">
+	<button>login</button>
+	<input type="hidden" name = "${_csrf.parameterName}" value ="${_csrf.token}">
+	</form>	
+</sec:authorize>
+
+<sec:authorize access="isAuthenticated()">
+	<form action="/logout" method="post" ><sec:authentication property="principal" var="user"/>
+	<strong>${user.username}</strong> 님 환영합니다
+	<button>logout</button>
+	<input type="hidden" name = "${_csrf.parameterName}" value ="${_csrf.token}">
+	</form>
+</sec:authorize>
+
+
+		 </div>
 		</div>
-			<li><a href="/board/list">Home</a></li>
-			<li><a href="/up/ajax">Image gallery</a></li>
+		<a href="#menu">Menu</a>
 	</header>
 	<!-- Nav -->
 	<nav id="menu">

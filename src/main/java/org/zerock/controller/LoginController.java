@@ -1,38 +1,45 @@
 package org.zerock.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.zerock.service.MemberService;
 
+import lombok.Setter;
 import lombok.extern.java.Log;
 
 @Controller
 @Log
 public class LoginController {
-
-	
+		
 	@GetMapping("/myLogin")
-	public void getMyLogin() {
+	public String loginInput(String error, String logout, Model model ) {
 		
-	}
-	
-	@PostMapping("/myLogin")
-	public String myLogin(String msg, Model model) {
-		log.info("error");
-		log.info("logout");
+		log.info("error: "+ error);
+		log.info("logout: "+ logout);
 		
-		if(msg == "error") {
-			model.addAttribute("error", "Login Error Check Your Account");
+		if(error != null) {
+			model.addAttribute("error", "아이디와 비밀번호를 확인하세요.");
 		}
 		
-		if(msg == "logout") {
-			model.addAttribute("logout", "logout!");
+		if(logout != null) {
+			model.addAttribute("logout", "로그아웃 되었습니다.");
 		}
 		
 		return "/myLogin";
+	}
+	
+	@GetMapping("/myLogout")
+	public void logout() {
 		
 	}
+	
+	@GetMapping("/accessDenied")
+	public void accessDenied() {
+		
+		
+	}	
 	
 	
 }

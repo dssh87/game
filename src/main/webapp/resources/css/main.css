@@ -2152,7 +2152,7 @@
 		-moz-appearance: none;
 		-webkit-appearance: none;
 		-ms-appearance: none;
-		appearance: none;
+		appearance: none; 
 		display: block;
 		float: left;
 		margin-right: -2rem;
@@ -2163,7 +2163,7 @@
 
 		input[type="checkbox"] + label,
 		input[type="radio"] + label {
-			text-decoration: none;
+		 	text-decoration: none; 
 			cursor: pointer;
 			display: inline-block;
 			font-size: 1rem;

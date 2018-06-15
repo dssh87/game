@@ -6,6 +6,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
 
 <head>
 <title>Hielo by TEMPLATED</title>
@@ -96,6 +98,16 @@ font-weight: bold;
 	display: inline-block;
 	width: 80%;
 }
+#header .logo .loginbtn{
+float: right;
+display: inline-block;
+text-align: right;
+}
+
+.loginbtn{
+
+
+}
 
 
 </style>
@@ -104,32 +116,29 @@ font-weight: bold;
 	<!--  -->
 	<!-- Header -->
 	<header id="header">
+	
 		<div class="logo">
-			<a href="/board/list">Candy~ <span>almond</span></a>
+			<div class="loginbtn">
+
+<sec:authorize access="isAnonymous()">
+	<form action="/myLogin">
+	<button>login</button>
+	
+	</form>	
+</sec:authorize>
+
+<sec:authorize access="isAuthenticated()">
+	<form action="/logout" method="post" ><sec:authentication property="principal" var="user"/>
+	<strong>${user.username}</strong> 님 환영합니다
+	<button>logout</button>
+	<input type="hidden" name = "${_csrf.parameterName}" value ="${_csrf.token}">
+	</form>
+</sec:authorize>
+
+
+		 </div>
 		</div>
 		<a href="#menu">Menu</a>
-		<form action="/logout" method="post">
-		<input type="hidden" name = "${_csrf.parameterName}" value ="${_csrf.token}"><tr></tr>		
-		
-		<%-- <c:if test="${_csrf.token}" == null>
-		로그인하세요
-		</c:if>
-		<c:if test="${_csrf.token}" !=null>
-		<sec:authentication property="principal.username"/>
-		</c:if> --%>
-		<sec:authentication property="principal" var="info"/>
-		<c:if test="${info ne 'anonymousUser'}">
-		<button>logout</button>
-		</c:if>
-		</form>
-		
-		<form action="/login" method="post">
-		<input type="hidden" name = "${_csrf.parameterName}" value ="${_csrf.token}"><tr>
-		<c:if test="${info eq 'anonymousUser'}">
-		<button>login</button>
-		</c:if>
-		</tr>
-		</form>
 	</header>
 	<!-- Nav -->
 	<nav id="menu">
@@ -185,7 +194,7 @@ font-weight: bold;
 								
 								<td class="box" id="toread" data-bno="${vo.bno}">
 								<span class="title"> <c:out value="${vo.title}" /></span>
-								<span class="count">[<c:out value = "${vo.recnt }"></c:out>]</span>
+								<span class="count">[<c:out value ="${vo.recnt }"></c:out>]</span>
 								<span class="ico"> 	<c:if test="${vo.checkNew()}"><img src="/resources/images/new.jpg"></c:if></span>	</td>		
 
 						
@@ -213,16 +222,15 @@ font-weight: bold;
 						<a href="/board/list ${cri.makeSearch(pm.start -1)}"><< </a>
 					</c:if>
 					<c:forEach begin="${pm.start}" end="${pm.end}" var="idx">
-						<a href="/board/list ${cri.makeSearch(idx)}"
-							class="<c:if test="${pm.cri.page==idx}">active</c:if>">${idx}</a>
+						<a href="/board/list${cri.makeSearch(idx)}"
+							class='<c:if test="${pm.cri.page==idx}">active</c:if>'>${idx}</a>
 					</c:forEach>
+					
 					<c:if test="${pm.next}">
 						<a href="/board/list ${cri.makeSearch(pm.end+1)}">>></a>
 					</c:if>
 				</div>
 			</div>
-
-
 
 			<!--@@@검색@@@  -->
 			<div class="search1">

@@ -5,21 +5,22 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
-	<security:http auto-config="true" use-expressions="false">
-		<security:form-login login-page="/myLogin" default-target-url="/board/list"/>
+	<security:http auto-config="true" use-expressions="true">
+	
+	<security:access-denied-handler error-page="/accessDenied" />
+	
+		<security:form-login login-page="/myLogin" default-target-url="/board/list" />
 		<security:logout invalidate-session="true" logout-success-url="/board/list"/>
 
-		<security:intercept-url pattern="/board/read" access="ROLE_USER" />
-			<security:intercept-url pattern="/board/register" access="ROLE_USER" />
-		<security:intercept-url pattern="/board/modify"	access="ROLE_USER" />
-		<security:intercept-url pattern="/up/ajax"	access="ROLE_USER" />
+		<security:intercept-url pattern="/board/read" access="hasRole('ROLE_USER')" />
+			<security:intercept-url pattern="/board/register" access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/board/modify"	access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/up/ajax"	access="hasRole('ROLE_USER')" />
 
 		<security:remember-me key="jr01"
 			token-validity-seconds="3600" data-source-ref="dataSource" />
 
 	</security:http>
-	
-
 
 	<security:authentication-manager>
 		<security:authentication-provider user-service-ref="customUserService">
@@ -29,6 +30,7 @@
 
 	<bean id="customUserService" class="org.zerock.security.CustomUserDetailsService"></bean>
 		<bean id="sampleEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+	<bean id="loginSuccessHandler" class="org.zerock.security.LoginSuccessHandler"></bean>
 
 
 

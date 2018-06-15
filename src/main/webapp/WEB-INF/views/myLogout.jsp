@@ -76,23 +76,12 @@ float: right;
 			<div class="mytable">
 				<h3>Login</h3>
 
-				<form action="/login" method="post">
+				<form action="/myLogout" method="post">
 					<div class="row uniform">
-						<div class="6u 12u$(xsmall)"> 
-						ID<input type="text" name = "username">	
-						</div>
 
-						<div class="6u 12u$(xsmall)">
-						PASSWORD<input type="text" name = "password">					
-						</div>						
-						
-						<div class="6u 12u$(small)">
-							<input type="checkbox" id="copy" name="remember-me">
-						<label for="copy">remember-me</label>
-						</div>
 						<div class="12u$">
 							<ul class="actions">
-								<button class="lbtn">login</button>								
+								<button class="lbtn">logout</button>								
 								<input type="hidden" name = "${_csrf.parameterName}" value ="${_csrf.token}">
 							</ul>
 						</div>
@@ -102,8 +91,6 @@ float: right;
 			</div>
 		</div>
 	</div>
-	
-	
 
 
 
@@ -141,7 +128,16 @@ float: right;
 				self.location = "/board/list${cri.makeSearch(cri.page)}";
 			});
 		});
-				
+		
+		var error = "${_csrf.token}.error"
+		
+		$(".lbtn").on("click", function(e){
+			if(error == "error")
+			alert("아이디나 비밀번호를 확인하세요.");
+		});
+		
+
+		
 	</script>
 </body>
 </html>

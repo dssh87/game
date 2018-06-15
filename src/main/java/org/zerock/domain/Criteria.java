@@ -7,8 +7,10 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import lombok.Data;
+import lombok.extern.java.Log;
 
 @Data
+@Log
 public class Criteria {
 
 	private int page;
@@ -17,7 +19,6 @@ public class Criteria {
 	public Criteria() {
 		this.page = 1;
 	}
-	//디폴트 생성자
 
 	public Criteria(int page) {
 
@@ -43,11 +44,13 @@ public class Criteria {
                 UriComponentsBuilder.newInstance().queryParam("page", page).
                 queryParam("type", this.type).
                 queryParam("keyword", encoding(this.keyword)).build();
-        return uriComponents.toUriString();}
         
-        else {UriComponents uriComponents =
-                UriComponentsBuilder.newInstance().queryParam("page", page).
-                build();
+        return uriComponents.toUriString();
+        
+        }else {
+        	UriComponents uriComponents =
+            UriComponentsBuilder.newInstance().queryParam("page", page).build();
+        	        
         return uriComponents.toUriString();}
                     
     }
