@@ -102,11 +102,6 @@ float: right;
 			</div>
 		</div>
 	</div>
-	
-	
-
-
-
 
 
 <!-- Footer -->
@@ -140,6 +135,21 @@ float: right;
 			$(".actions").on("click", ".list", function(e) {
 				self.location = "/board/list${cri.makeSearch(cri.page)}";
 			});
+			
+			$(".lbtn").on("click", function(e) {
+				self.location = "/index";
+			});
+			
+			var error = "${error}"
+				if(error == "true"){
+					alert("아이디나 비밀번호를 확인하세요.");
+				}
+			
+			var msg = '<c:out value="${msg}"/>';		
+
+			if (msg == "join") {
+				alert("회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.");
+				}
 		});
 				
 	</script>

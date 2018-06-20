@@ -12,6 +12,8 @@ public interface MemberService {
 	
 	public void createAuth(MemberAuthVO auth);
 	
-	public void updatePassword(@Param("mid")String mid, @Param("enpw")String encryptedPw);
+	public void updatePassword(@Param("mid")String mid, @Param("empw")String encryptedPw);
+	
+	public Integer idcheck(String mid);
 
 }

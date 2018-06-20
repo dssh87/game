@@ -27,6 +27,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 		
 		log.info("loadUserByUsername............." + username);
 		
+		System.out.println("--------------------------------");
+		System.out.println("--------------------------------");
+		System.out.println("--------------------------------");
+		System.out.println("--------------------------------");
+		
+		
+		
 		MemberVO vo = mapper.read(username);
 		
 		User user = new User(vo.getMid(),vo.getMpw(),

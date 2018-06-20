@@ -78,6 +78,7 @@ font-weight: bold;
 	padding-right: 50px;
 	white-space: nowrap;
 	margin-bottom: 0;
+	cursor: pointer;
 }
 
 .title {
@@ -104,9 +105,16 @@ display: inline-block;
 text-align: right;
 }
 
-.loginbtn{
+#header .logo .loginbtn .logOutbtn .btnlogOut1{
 
+float: left;
+margin-right: 10px;
 
+}
+
+#header .logo .loginbtn .logOutbtn .btnlogOut2{
+display: inline-block;
+text-align: left;
 }
 
 
@@ -127,14 +135,20 @@ text-align: right;
 	</form>	
 </sec:authorize>
 
+<div class="logOutbtn">
 <sec:authorize access="isAuthenticated()">
-	<form action="/logout" method="post" ><sec:authentication property="principal" var="user"/>
-	<strong>${user.username}</strong> 님 환영합니다
-	<button>logout</button>
+	<form action="/logout" method="post" >
+	<sec:authentication property="principal" var="user"/>
+	<div class="btnlogOut1">
+	<strong>${user.username}</strong>님 환영합니다.
+	</div>
+	<div class="btnlogOut2">
+	<button class="lOutbtn">logout</button>
+	</div>
 	<input type="hidden" name = "${_csrf.parameterName}" value ="${_csrf.token}">
 	</form>
 </sec:authorize>
-
+</div>
 
 		 </div>
 		</div>
@@ -300,7 +314,7 @@ text-align: right;
 
 			console.log("history:" + history.state);
 
-			var msg = '<c:out value="${msg}"/>';
+			var msg = '<c:out value="${msg}"/>';		
 
 			if (msg == "success" && !history.state) {
 				alert("등록이 완료되었습니다.");
@@ -314,8 +328,14 @@ text-align: right;
 			if (msg == "failRemove" && !history.state) {
 				alert("삭제에 실패하였습니다.");
 				}
+				
 			history.replaceState({}, null, null);
-
+			
+			$(".lOutbtn").on("click", function(e) {
+				
+				alert("로그아웃 되었습니다.");
+				
+			});
 		});
 	</script>
 

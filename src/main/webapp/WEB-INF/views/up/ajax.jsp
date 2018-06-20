@@ -4,6 +4,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <head>
 <title>Hielo by TEMPLATED</title>
 <meta charset="utf-8" />
@@ -13,8 +16,6 @@
 
 
 .realName {
-	
-
     text-overflow: ellipsis;
     white-space: nowrap;
     word-wrap: normal;
@@ -22,7 +23,6 @@
     overflow: hidden;
     display: inline-block
 }
-
 
 .pagination {
 	display: inline-block;
@@ -138,22 +138,32 @@ padding:3px;
 display: inline-block;
 text-align:right;
 margin: auto;
-
-
-
 }
-form{
-margin: 0 auto;
-width: 250px;}
         
-        .xxx{
-        float: right;
-        margin-right:5px;
-        color: #DC143C;}
+.xxx{
+float: right;
+margin-right:5px;
+color: #DC143C;}
+
+.nameTag{
+background: white;
+}        
         
-        
-        .nameTag{
-        background: white;}
+#header .logo .loginbtn{
+float: right;
+display: inline-block;
+text-align: right;
+}
+
+#header .logo .loginbtn .logOutbtn .btnlogOut1{
+float: left;
+margin-right: 10px;
+}
+
+#header .logo .loginbtn .logOutbtn .btnlogOut2{
+display: inline-block;
+text-align: left;
+}
 
 
 </style>
@@ -164,8 +174,32 @@ width: 250px;}
 	<!-- Header -->
 	<header id="header">
 		<div class="logo">
-			<a href="/board/list">Hielo <span>by TEMPLATED</span></a>
-		</div>
+			<div class="loginbtn">
+
+<sec:authorize access="isAnonymous()">
+	<form action="/myLogin">
+	<button>login</button>
+	
+	</form>	
+</sec:authorize>
+
+<div class="logOutbtn">
+<sec:authorize access="isAuthenticated()">
+	<form action="/logout" method="post" >
+	<sec:authentication property="principal" var="user"/>
+	<div class="btnlogOut1">
+	<strong>${user.username}</strong>님 환영합니다.
+	</div>
+	<div class="btnlogOut2">
+	<button class="lOutbtn">logout</button>
+	</div>
+	<input type="hidden" name = "${_csrf.parameterName}" value ="${_csrf.token}">
+	</form>
+</sec:authorize>
+</div>
+</div>
+
+		 </div>
 		<a href="#menu">Menu</a>
 	</header>
 	<!-- Nav -->

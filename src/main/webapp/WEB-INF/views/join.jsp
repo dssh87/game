@@ -33,6 +33,7 @@
 float: right;
 }
 
+
 /* body {
 	background-image: url(/resources/images/bg.jpg);
 } */
@@ -76,24 +77,43 @@ float: right;
 			<div class="mytable">
 				<h3>Login</h3>
 
-				<form action="/logout" method="post">
+				<form action="/join" method="post">
 					<div class="row uniform">
+						<div class="4u 12u$(xsmall)"> 
+						ID<input type="text" name = "mid" size="100%" id="checkid">
+						</div>
+						
+						
+						<div class="6u 12u$(xsmall)"> 
+					    Name<input type="text" name = "mname">	
+						</div>
 
+						<div class="6u 12u$(xsmall)">
+						PASSWORD<input type="text" name = "mpw">					
+						</div>						
+				
+						<div class="6u 12u$(xsmall)">
+						E-mail<input type="text" name = "email">		
+						</div>	
+						
 						<div class="12u$">
 							<ul class="actions">
-								<button class="lbtn">logout</button>								
+								<button class="jbtn">join</button>								
 								<input type="hidden" name = "${_csrf.parameterName}" value ="${_csrf.token}">
 							</ul>
 						</div>
 					</div>
 				</form>
+				
+				
+					<div class="2u 12u$(xsmall)">
+						<button class="idCheck">ID CHECK</button>
+					</div>
+				
 				<hr/>
 			</div>
 		</div>
 	</div>
-
-
-
 
 
 <!-- Footer -->
@@ -124,20 +144,41 @@ float: right;
 	<script>
 	
 		$(document).ready(function(e) {
-			$(".actions").on("click", ".list", function(e) {
-				self.location = "/board/list${cri.makeSearch(cri.page)}";
+			var idck = 0;
+			
+			$(".idCheck").on("click", function(e) {
+				console.log("idckeck....")
+				
+				var mid = $("#checkid").val();
+				console.log("mid....", mid)
+				
+				$.ajax({
+					
+					type: 'post',
+					data: mid,
+					url: "/idcheck",
+					headers: {
+	               	     "Content-type": "application/json"
+	               	 },
+	               	 dataType: "text",
+	               	 data: JSON.stringify(mid),
+					success: function(mid){
+						
+						if(data.cnt > 0){
+							alert("아이디가 존재합니다. 다른 아이디를 입력하세요.");
+						}else{
+							alert("사용가능한 아이디입니다.");
+							
+							idck = 1;
+						}
+					}
+				});
 			});
+			
 		});
-		
-		var error = "${_csrf.token}.error"
-		
-		$(".lbtn").on("click", function(e){
-			if(error == "error")
-			alert("아이디나 비밀번호를 확인하세요.");
-		});
-		
-
-		
+				
 	</script>
+	
+	
 </body>
 </html>

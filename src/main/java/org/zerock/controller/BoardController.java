@@ -76,9 +76,7 @@ public class BoardController {
 			
 		} else {
 			rttr.addFlashAttribute("msg", "fail");
-		}
-
-		
+		}		
 		
 		return "redirect:/board/list";
 			
