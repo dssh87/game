@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+
+    <bean id="loginSuccess" class="org.zerock.security.LoginSuccessHandler"></bean>
+	<bean id="loginFailure" class="org.zerock.security.LoginFailureHandler"></bean>
+	<bean id="customUserService" class="org.zerock.security.CustomUserDetailsService"></bean>
+	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+	
+
+	<security:http auto-config="true" use-expressions="true">
+	
+			<security:intercept-url pattern="/board/read" access="hasRole('ROLE_USER')" />
+			<security:intercept-url pattern="/board/register" access="hasRole('ROLE_USER')" />
+			<security:intercept-url pattern="/board/modify"	access="hasRole('ROLE_USER')" />
+			<security:intercept-url pattern="/up/ajax"	access="hasRole('ROLE_USER')" />
+	
+		<security:access-denied-handler error-page="/accessDenied" />
+	
+		<security:form-login login-page="/myLogin"  		
+		 authentication-success-handler-ref="loginSuccess"
+		 authentication-failure-handler-ref="loginFailure"
+		 
+		 />
+		
+		<security:logout invalidate-session="true" logout-success-url="/board/list" />
+
+		<security:remember-me key="jr01" token-validity-seconds="3600" data-source-ref="dataSource" />
+
+	</security:http>
+
+
+	<security:authentication-manager>
+		<security:authentication-provider user-service-ref="customUserService">
+		
+			<security:password-encoder ref="passwordEncoder" />
+
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+
+
+
+
+
+</beans>
