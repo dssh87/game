@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class MemberVO {
 
-	private String mid, mpw, mname, email;
+	private String mid, mpw, mname, email, phone_number;
 	
 	private List<MemberAuthVO> authList;
 	

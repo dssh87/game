@@ -14,13 +14,16 @@
 
 <style>
 .subpage {
-	background: linear-gradient(120deg, #D3959B, #BFE6BA) fixed
+	background: linear-gradient(120deg, #F5F4F5, #F5F4F5) fixed
 }
 
 .outer {
 	padding-top: 5%;
 	background-color: #ffffff;
 	background-color: rgba(255, 255, 255, 0.6);
+	width: 100%;
+	
+	
 }
 
 .mytable {
@@ -28,11 +31,29 @@
 	margin-left: auto;
 	margin-right: auto;
 }
+.container{
+	width: 50%;
+}
 
 .actions{
 float: right;
 }
 
+.midmid{
+	width: 100%;
+}
+
+.mpwmid{
+	width: 100%;
+}
+
+body div{
+font-size: 13pt;
+}
+
+button{
+height: 3rem;
+}
 /* body {
 	background-image: url(/resources/images/bg.jpg);
 } */
@@ -43,7 +64,10 @@ float: right;
 	<!-- Header -->
 	<header id="header">
 		<div class="logo">
-			<a href="/board/list">Hielo <span>by TEMPLATED</span></a>
+			<a href="/board/list">
+			
+			<i class="fa fa-truck" ></i>  foodtruck </a>
+		
 		</div>
 		<a href="#menu">Menu</a>
 	</header>
@@ -60,9 +84,8 @@ float: right;
 	<section id="One" class="wrapper style3">
 		<div class="inner">
 			<header class="align-center">
-				<h1>almond candy anypang</h1>
-				<P></P>
-				<h2>LogIn Page</h2>
+				<p>WHAT DO YOU WANT TO EAT?</p>
+				<h2>FOOD TRUCK</h2>
 			</header>
 		</div>
 	</section>
@@ -78,15 +101,15 @@ float: right;
 
 				<form action="/login" method="post">
 					<div class="row uniform">
-						<div class="6u 12u$(xsmall)"> 
+						<div class="midmid"> 
 						ID<input type="text" name = "username">	
 						</div>
 
-						<div class="6u 12u$(xsmall)">
+						<div class="mpwmid">
 						PASSWORD<input type="text" name = "password">					
-						</div>						
-						
-						<div class="6u 12u$(small)">
+						</div>
+
+					<div class="6u 12u$(small)">
 							<input type="checkbox" id="copy" name="remember-me">
 						<label for="copy">remember-me</label>
 						</div>

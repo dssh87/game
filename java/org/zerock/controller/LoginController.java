@@ -69,9 +69,11 @@ public class LoginController {
 		String mpw = vo.getMpw();
 		String mname = vo.getMname();
 		String email = vo.getEmail();
+		String phone = vo.getPhone_number();
 				
 		if (mid != null && mid.trim().length() != 0 && mpw != null && mpw.trim().length() != 0 &&
-				mname != null && mname.trim().length() != 0 && email != null && email.trim().length() != 0) {
+				mname != null && mname.trim().length() != 0 && email != null && email.trim().length() != 0
+				&& phone != null && phone.trim().length() != 0) {
 			service.create(vo);
 			rttr.addFlashAttribute("msg", "join");
 			

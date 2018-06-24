@@ -13,8 +13,12 @@
 <link rel="stylesheet" href="/resources/css/main.css" />
 
 <style>
+.wrapper style3{
+padding: 6rem 0 15rem 0;
+}
 .subpage {
-	background: linear-gradient(120deg, #D3959B, #BFE6BA) fixed
+	
+	background: #F5F4F5;
 }
 
 .container{
@@ -23,7 +27,7 @@
 
 .outer {
 	padding-top: 5%;
-	background-color: #ffffff;
+ 	background-color: #ffffff; 
 	background-color: rgba(255, 255, 255, 0.6);
 	width: 100%;	
 }
@@ -47,7 +51,7 @@
 	width: 75%;
 }
 .midCheck{
-	width: 30%;
+	width: 25%;
 	margin-top: 27px;
 }
 
@@ -63,6 +67,9 @@
 	width: 100%;
 }
 
+.phoneinput{
+	width: 100%;
+}
 body div{
 font-size: 13pt;
 }
@@ -79,7 +86,7 @@ height: 3rem;
 	<!-- Header -->
 	<header id="header">
 		<div class="logo">
-			<a href="/board/list">FoodTruck <span>by Drama</span></a>
+			<a href="/board/list"><i class="fa fa-truck" ></i>  foodtruck</a>
 		</div>
 		<a href="#menu">Menu</a>
 	</header>
@@ -96,9 +103,8 @@ height: 3rem;
 	<section id="One" class="wrapper style3">
 		<div class="inner">
 			<header class="align-center">
-				<h1>Welcome to FoodTruck</h1>
-				<P></P>
-				<h2>Join us</h2>
+				<p>WHAT DO YOU WANT TO EAT?</p>
+				<h2>FOOD TRUCK</h2>
 			</header>
 		</div>
 	</section>
@@ -132,6 +138,10 @@ height: 3rem;
 				
 						<div class="emailinput">
 						E-mail<input type="text" name = "email">		
+						</div>	
+						
+						<div class="phoneinput">
+						Phone<input type="text" name = "phone_number">		
 						</div>	
 						
 						<div class="12u$">
